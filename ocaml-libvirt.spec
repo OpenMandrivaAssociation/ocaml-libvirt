@@ -1,6 +1,6 @@
 %define name	ocaml-libvirt
 %define version	0.4.4.2
-%define release	%mkrel 1
+%define release	%mkrel 2
 
 Name:		%{name}
 Version:	%{version}
@@ -10,9 +10,8 @@ License:	LGPL
 Group:		Development/Other
 URL:		http://libvirt.org/ocaml/
 Source:	    http://libvirt.org/sources/ocaml/%{name}-%{version}.tar.gz	
-Patch:      ocaml-libvirt-0.4.4.2-install-flags.patch
 BuildRequires:	ocaml
-BuildRequires:  findlib
+BuildRequires:  ocaml-findlib
 BuildRequires:	libvirt-devel
 BuildRoot:	%{_tmppath}/%{name}-%{version}
 
@@ -38,7 +37,6 @@ using %{name}.
 
 %prep
 %setup -q
-%patch -p 1
 
 %build
 %configure2_5x
@@ -47,10 +45,11 @@ using %{name}.
 
 %install
 rm -rf %{buildroot}
-install -d -m 755 %{buildroot}/%{ocaml_sitelib}
+install -d -m 755 %{buildroot}/%{_libdir}/ocaml/stublibs
 make install-opt \
-    OCAMLFIND_INSTFLAGS="-destdir %{buildroot}/%{ocaml_sitelib}" \
+    OCAMLFIND_DESTDIR="%{buildroot}/%{_libdir}/ocaml" \
     DESTDIR=%{buildroot}
+rm -f  %{buildroot}/%{_libdir}/ocaml/stublibs/*.owner
 
 %clean
 rm -rf %{buildroot}
@@ -59,11 +58,16 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 %doc README TODO.libvirt ChangeLog COPYING COPYING.LIB
 /usr/bin/mlvirsh
-%dir %{ocaml_sitelib}/libvirt
-%{ocaml_sitelib}/libvirt/*.cmi
+%dir %{_libdir}/ocaml/libvirt
+%{_libdir}/ocaml/libvirt/*.cmi
+%{_libdir}/ocaml/libvirt/*.cma
+%{_libdir}/ocaml/libvirt/META
+%{_libdir}/ocaml/stublibs/*.so
 
 %files devel
 %defattr(-,root,root)
-%{ocaml_sitelib}/libvirt/*
-%exclude %{ocaml_sitelib}/libvirt/*.cmi
+%{_libdir}/ocaml/libvirt/*.a
+%{_libdir}/ocaml/libvirt/*.cmx
+%{_libdir}/ocaml/libvirt/*.cmxa
+%{_libdir}/ocaml/libvirt/*.mli
 
