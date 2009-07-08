@@ -1,6 +1,6 @@
 %define name	ocaml-libvirt
 %define version	0.6.1.0
-%define release	%mkrel 1
+%define release	%mkrel 2
 
 Name:		%{name}
 Version:	%{version}
