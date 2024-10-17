@@ -8,7 +8,7 @@ Release:	%{release}
 Summary:	OCaml bindings for libvirt
 License:	LGPL
 Group:		Development/Other
-URL:		http://libvirt.org/ocaml/
+URL:		https://libvirt.org/ocaml/
 Source:	    http://libvirt.org/sources/ocaml/%{name}-%{version}.tar.gz	
 BuildRequires:	ocaml
 BuildRequires:  ocaml-findlib
