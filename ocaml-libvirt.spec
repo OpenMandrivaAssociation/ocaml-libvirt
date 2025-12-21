@@ -10,6 +10,11 @@ License:	LGPL
 Group:		Development/Other
 URL:		https://libvirt.org/ocaml/
 Source:	    http://libvirt.org/sources/ocaml/%{name}-%{version}.tar.gz	
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	ocaml
 BuildRequires:  ocaml-findlib
 BuildRequires:	libvirt-devel
